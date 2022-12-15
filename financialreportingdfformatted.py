@@ -68,7 +68,7 @@ def getfinancialreportingdf(ticker):
 
     df= pd.DataFrame({'eps': eps,'epsgrowth': epsgrowth,'netincome': netincome,'shareholderequity': shareholderequity,'roa': 
                   roa,'longtermdebt': longtermdebt,'interestexpense': interestexpense,'ebitda': ebitda},index=['2022','2018','2019','2020','2021','5-YEAR TREND'])
-    df = df.head(5).sort_index(ascending=True))
+    df = df.head(5).sort_index(ascending=True)
     return df
 
 def getelementinlist(list,element):
