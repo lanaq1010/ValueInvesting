@@ -15,7 +15,7 @@ def getfinancialreportingdf(ticker):
 
 
     # Income statement
-    titlesfinancials = text_soup_financials.findAll('td', {'class': 'rowTitle'})
+    titlesfinancials = text_soup_financials.findAll('td', {'class': 'overflow__cell fixed--column'})
     epslist=[]
     netincomelist = []
     longtermdebtlist = [] 
@@ -24,23 +24,23 @@ def getfinancialreportingdf(ticker):
 
     for title in titlesfinancials:
         if 'EPS (Basic)' in title.text:
-            epslist.append ([td.text for td in title.findNextSiblings(attrs={'class': 'valueCell'}) if td.text])
+            epslist.append ([td.text for td in title.findNextSiblings(attrs={'class': 'overflow__cell'}) if td.text])
         if 'Net Income' in title.text:
-            netincomelist.append ([td.text for td in title.findNextSiblings(attrs={'class': 'valueCell'}) if td.text])
+            netincomelist.append ([td.text for td in title.findNextSiblings(attrs={'class': 'overflow__cell'}) if td.text])
         if 'Interest Expense' in title.text:
-            interestexpenselist.append ([td.text for td in title.findNextSiblings(attrs={'class': 'valueCell'}) if td.text])
+            interestexpenselist.append ([td.text for td in title.findNextSiblings(attrs={'class': 'overflow__cell'}) if td.text])
         if 'EBITDA' in title.text:
-            ebitdalist.append ([td.text for td in title.findNextSiblings(attrs={'class': 'valueCell'}) if td.text])
+            ebitdalist.append ([td.text for td in title.findNextSiblings(attrs={'class': 'overflow__cell'}) if td.text])
 
 
     # Balance sheet
-    titlesbalancesheet = text_soup_balancesheet.findAll('td', {'class': 'rowTitle'})
+    titlesbalancesheet = text_soup_balancesheet.findAll('td', {'class': 'overflow__cell fixed--column'})
     equitylist=[]
     for title in titlesbalancesheet:
         if 'Total Shareholders\' Equity' in title.text:
-            equitylist.append( [td.text for td in title.findNextSiblings(attrs={'class': 'valueCell'}) if td.text])
+            equitylist.append( [td.text for td in title.findNextSiblings(attrs={'class': 'overflow__cell'}) if td.text])
         if 'Long-Term Debt' in title.text:
-            longtermdebtlist.append( [td.text for td in title.findNextSiblings(attrs={'class': 'valueCell'}) if td.text])
+            longtermdebtlist.append( [td.text for td in title.findNextSiblings(attrs={'class': 'overflow__cell'}) if td.text])
 
     # Variables        
     # eps = epslist[0]
