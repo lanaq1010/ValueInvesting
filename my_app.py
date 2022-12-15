@@ -18,8 +18,8 @@ margin = 0.15
 
 # Set up the app
 app = dash.Dash(__name__)
-server = app.server
-
+my_app:server
+    
 app.layout = html.Div([
     html.Div([
 
