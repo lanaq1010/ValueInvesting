@@ -17,10 +17,10 @@ margin = 0.15
 
 
 # Set up the app
-app = dash.Dash(__name__)
+my_app = dash.Dash(__name__)
 my_app:server
     
-app.layout = html.Div([
+my_app.layout = html.Div([
     html.Div([
 
         html.H1('Value Investing'),
@@ -67,7 +67,7 @@ app.layout = html.Div([
 
 
 # For the stocks graph
-@app.callback(Output('my-graph', 'figure'), [Input('my-dropdown', 'value')])
+@my_app.callback(Output('my-graph', 'figure'), [Input('my-dropdown', 'value')])
 def update_graph(selected_dropdown_value):
     global stockpricedf # Needed to modify global copy of stockpricedf
     stockpricedf = web.DataReader(
@@ -82,7 +82,7 @@ def update_graph(selected_dropdown_value):
 
 
 # for the table
-@app.callback(Output('my-table', 'children'), [Input('my-dropdown', 'value')])
+@my_app.callback(Output('my-table', 'children'), [Input('my-dropdown', 'value')])
 def generate_table(selected_dropdown_value,max_rows=10):
     global financialreportingdf # Needed to modify global copy of financialreportingdf
     financialreportingdf = getfinancialreportingdfformatted(selected_dropdown_value.strip().lower()).reset_index()
@@ -96,7 +96,7 @@ def generate_table(selected_dropdown_value,max_rows=10):
 
     
 # for the reason-list
-@app.callback(Output('reason-list', 'children'), [Input('my-dropdown', 'value')])
+@my_app.callback(Output('reason-list', 'children'), [Input('my-dropdown', 'value')])
 def generate_reason_list(selected_dropdown_value):
     global financialreportingdf # Needed to modify global copy of financialreportingdf
     reasonlist = eligibilitycheck(selected_dropdown_value.strip().lower(),financialreportingdf)
@@ -106,7 +106,7 @@ def generate_reason_list(selected_dropdown_value):
 
 
 # for the expected-future-price-table
-@app.callback(Output('expected-future-price-table', 'children'), 
+@my_app.callback(Output('expected-future-price-table', 'children'), 
     [Input('my-dropdown', 'value'), Input('discountrate-slider', 'value'),Input('marginrate-slider', 'value')])
 def generate_future_price_table(selected_dropdown_value,discountrate,marginrate,max_rows=10):
     global financialreportingdf # Needed to modify global copy of financialreportingdf
